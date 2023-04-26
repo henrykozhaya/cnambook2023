@@ -1,2 +1,2 @@
-# cnambook2023
-Projet Cnam - NFA042 - 2023
+# Cnam Book 2023
+It's a project dedicated for web development (NFA042) students at Cnam Bickfaya - 2023
