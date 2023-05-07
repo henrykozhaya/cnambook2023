@@ -1,11 +1,8 @@
 <?php
-$servername = "localhost";
-$username = "cnambook";
-$password = ".[L5P4s@D3w]n!Uw";
-$dbname = "cnambook23";
+$config = require_once 'config.php';
 
 // Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
+$conn = new mysqli($config["MYSQL_HOST"], $config["MYSQL_USER"], $config["MYSQL_PASS"], $config["MYSQL_DB"]);
 
 // Check connection
 if ($conn->connect_error) {
