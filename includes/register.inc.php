@@ -1,4 +1,8 @@
 <?php
+    require_once "includes/functions.php";
+    if(isset($_SESSION["loggedInUser"])){
+        header("location:index.php");
+    }
     if
 	(
 		isset($_POST['first_name']) && $_POST['first_name'] != '' && 
