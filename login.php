@@ -18,6 +18,10 @@
 			<label for="password">Password</label>
 			<input type="password" name="password" id="password" required value="cnamuser2023">
 			</div>
+			<div class="input_container">
+			<label for="remember_me">Remember me</label>
+			<input type="checkbox" name="remember_me" id="remember_me" >
+			</div>
             <div class="input_container">
 			<input type="submit" name="login" value="login">
 			</div>

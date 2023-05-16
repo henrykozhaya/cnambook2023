@@ -22,8 +22,8 @@
 			<input type="email" name="email" id="email" required  value="info@cnam.com">
 			</div>
 			<div class="input_container">
-			<label for="mobile_nummber">Mobile Number</label>
-			<input type="text" name="mobile_nummber" id="mobile_nummber" required value="04123456">
+			<label for="mobile_number">Mobile Number</label>
+			<input type="text" name="mobile_number" id="mobile_number" required value="04123456">
 			</div>
 			<div class="input_container">
 			<label for="birthdate">Birthdate</label>

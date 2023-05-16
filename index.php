@@ -37,7 +37,7 @@ require_once "includes/functions.php";
                 echo "<h3>Latest Books</h3>";
                 require_once "includes/db.inc.php";
                 $query = "SELECT isbn, title, category, author, price FROM book ORDER BY created DESC LIMIT 0, 8";
-                $result = mysqli_query($conn, $query);
+                $result = mysqli_query($connection, $query);
                 $html = "<table border='1'>";
                 $html .= "<thead>";
                 $html .= "<th>ISBN</th>";
