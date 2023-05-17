@@ -1,7 +1,7 @@
 <?php
 return [
-    "MYSQL_HOST" => "localhost",
-    "MYSQL_DB" => "cnambook23",
-    "MYSQL_USER" => "cnambook",
-    "MYSQL_PASS" => ".[L5P4s@D3w]n!Uw",
+    "MYSQL_HOST" => "mysql.uk.cloudlogin.co",
+    "MYSQL_DB" => "logicempower_cnambook2023",
+    "MYSQL_USER" => "logicempower_cnambook2023",
+    "MYSQL_PASS" => "bf2TOv40Q@",
 ];

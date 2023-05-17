@@ -1,7 +1,62 @@
 body {
     font-family: Arial, sans-serif;
 }
+/* styles.css */
 
+/* Reset default margin and padding */
+body, header, nav, ul, li, input, button {
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #f2f2f2;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+/* Adjust logo size and styling as needed */
+}
+
+.menu {
+    list-style: none;
+    display: flex;
+}
+
+.menu li {
+    margin-right: 10px;
+}
+
+.menu li a {
+    text-decoration: none;
+    color: #333;
+    padding: 5px;
+}
+
+.search {
+    display: flex;
+    align-items: center;
+}
+
+.search input[type="text"] {
+    padding: 5px;
+    border-radius: 5px 0 0 5px;
+    border: 1px solid #ccc;
+}
+
+.search button {
+    padding: 5px 10px;
+    border-radius: 0 5px 5px 0;
+    border: 1px solid #ccc;
+    background-color: #eee;
+}
+
+.main{
+    padding:10px;
+}
 h1 {
     text-align: center;
 }
