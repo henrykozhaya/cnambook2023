@@ -1,8 +1,5 @@
 <?php
-    require_once "includes/functions.php";
-    if(isset($_SESSION["loggedInUser"])){
-        header("location:index.php");
-    }
+	require_once "includes/header.inc.php";
     if
 	(
 		isset($_POST['first_name']) && $_POST['first_name'] != '' && 
@@ -22,17 +19,15 @@
 		// $user["birthdate"] = checkDate($_POST['birthdate']);
 		$user["username"] = cleanTextInput($_POST['username']);
 		$user["password"] = cleanTextInput($_POST['password']);
-		preDisplay($user);
-		die();
 		
 		$query = "INSERT INTO `user`(`first_name`, `last_name`, `birthdate`, `email`, `mobile_number`, `username`, `password`, `created`, `modified`) VALUES (";
-		$query .= "'" . $_POST["first_name"] . "', ";
-		$query .= "'" . $_POST["last_name"] . "', ";
-		$query .= "'" . $_POST["birthdate"] . "', ";
-		$query .= "'" . $_POST["email"] . "', ";
-		$query .= "'" . $_POST["mobile_number"] . "', ";
-		$query .= "'" . $_POST["username"] . "', ";
-		$query .= "'" . MD5($_POST["password"]) . "', ";
+		$query .= "'" . $user["first_name"] . "', ";
+		$query .= "'" . $user["last_name"] . "', ";
+		$query .= "'" . $user["birthdate"] . "', ";
+		$query .= "'" . $user["email"] . "', ";
+		$query .= "'" . $user["mobile_number"] . "', ";
+		$query .= "'" . $user["username"] . "', ";
+		$query .= "'" . MD5($user["password"]) . "', ";
 		$query .= "NOW(), ";
 		$query .= "NOW() ";
 		$query .= ")";

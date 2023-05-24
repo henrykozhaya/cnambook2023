@@ -1,6 +1,40 @@
 <?php
 require_once "db.inc.php";
+require_once "config.inc.php";
 session_start();
+
+$secure_pages = array(
+    "/cnambook2023/order.php",
+    "/cnambook2023/test.php"
+);
+$login_register_pages = array(
+    "/cnambook2023/login.php",
+    "/cnambook2023/register.php"
+);
+if
+(
+    in_array($_SERVER["PHP_SELF"], $secure_pages) && 
+    !isset($_SESSION["user"])
+){
+    header("location:login.php");
+}
+else if
+(
+    in_array($_SERVER["PHP_SELF"], $login_register_pages) &&
+    isset($_SESSION["user"]) 
+){
+    header("location:index.php");
+}
+
+
+
+
+
+
+
+
+
+
 
 // $adminPath = "/cnambook2023/admin/";
 // if(! 
@@ -51,7 +85,20 @@ function checkEmail($email){
 
 function getLatestBooks($count){
     global $connection;
-    $query = "SELECT isbn, title, category, author, price FROM book ORDER BY created DESC LIMIT 0, $count";
+    $query = "SELECT    b.isbn, 
+                        b.title, 
+                        c.description AS category, 
+                        a.name as author, 
+                        b.price 
+            FROM        book b,
+                        category c,
+                        book_category bc,
+                        author a
+            WHERE       b.isbn = bc.isbn 
+            AND         bc.category = c.id 
+            AND         b.author = a.id 
+            ORDER BY    created DESC 
+            LIMIT       0, $count";
     $result = mysqli_query($connection, $query);
     $html = "<table border='1'>";
     $html .= "<thead>";
@@ -81,7 +128,14 @@ function getLatestBooks($count){
 
 function getBestAuthors(){
     global $connection;
-    $query = "SELECT author, COUNT(isbn) AS BooksNbr FROM book GROUP BY author HAVING COUNT(isbn) > 1 ORDER BY COUNT(isbn) DESC";
+    $query = "SELECT    a.name AS author, 
+                        COUNT(isbn) AS BooksNbr 
+            FROM        book b,
+                        author a 
+            WHERE       b.author = a.id
+            GROUP BY    a.name 
+            HAVING      COUNT(isbn) > 1 
+            ORDER BY    COUNT(isbn) DESC";
     $result = mysqli_query($connection, $query);
 
     $html = "<table border='1'>";

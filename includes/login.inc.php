@@ -1,8 +1,5 @@
 <?php
-    require_once "includes/functions.php";
-    if(isset($_SESSION["user"])){
-        header("location:index.php");
-    }
+    require_once "includes/functions.inc.php";
     if
 	(
 		isset($_POST['username']) && $_POST['username'] != '' && 

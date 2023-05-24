@@ -5,7 +5,22 @@ require_once "includes/header.inc.php";
         <div>
         <h3>Latest books</h3>
         <?php
-            $query = "SELECT * FROM book";
+            $query =  
+                   "SELECT  b.isbn,
+                            b.title,
+                            c.description AS category, 
+                            a.name as author, 
+                            e.name as editor, 
+                            b.price 
+                    FROM    book b,
+                            category c,
+                            book_category bc,
+                            author a,
+                            editor e
+                    WHERE   b.isbn = bc.isbn 
+                    AND     bc.category = c.id 
+                    AND     b.author = a.id
+                    AND     b.editor = e.id"; 
             
             if(isset($_GET["search"]) && $_GET["search"] != ""){
                 $query .= " WHERE title LIKE '%" . cleanTextInput($_GET["search"]) . "%'";
