@@ -14,24 +14,30 @@
 		require_once "includes/db.inc.php";
 		$user["first_name"] = cleanTextInput($_POST['first_name']);
 		$user["last_name"] = cleanTextInput($_POST['last_name']);
-		$user["email"] = checkEmail($_POST['email']);
 		$user["mobile_number"] = cleanTextInput($_POST['mobile_number']);
-		// $user["birthdate"] = checkDate($_POST['birthdate']);
 		$user["username"] = cleanTextInput($_POST['username']);
 		$user["password"] = cleanTextInput($_POST['password']);
-		
-		$query = "INSERT INTO `user`(`first_name`, `last_name`, `birthdate`, `email`, `mobile_number`, `username`, `password`, `created`, `modified`) VALUES (";
-		$query .= "'" . $user["first_name"] . "', ";
-		$query .= "'" . $user["last_name"] . "', ";
-		$query .= "'" . $user["birthdate"] . "', ";
-		$query .= "'" . $user["email"] . "', ";
-		$query .= "'" . $user["mobile_number"] . "', ";
-		$query .= "'" . $user["username"] . "', ";
-		$query .= "'" . MD5($user["password"]) . "', ";
-		$query .= "NOW(), ";
-		$query .= "NOW() ";
-		$query .= ")";
+		if(checkBirthdate($_POST['birthdate']) && checkEmail($_POST['email'])){
+			$user["email"] = checkEmail($_POST['email']);
+			$user["birthdate"] = $_POST['birthdate'];
 
-		// $conn->query($query);
-		mysqli_query($connection, $query);
+			$query = "INSERT INTO `user`";
+			$query .= "(`first_name`, `last_name`, `birthdate`, `email`, `mobile_number`, `username`, `password`) ";
+			$query .= "VALUES (";
+			$query .= "'" . $user["first_name"] . "', ";
+			$query .= "'" . $user["last_name"] . "', ";
+			$query .= "'" . $user["birthdate"] . "', ";
+			$query .= "'" . $user["email"] . "', ";
+			$query .= "'" . $user["mobile_number"] . "', ";
+			$query .= "'" . $user["username"] . "', ";
+			$query .= "MD5('" . $user["password"] . "')";
+			$query .= ")";
+			
+			mysqli_query($connection, $query);
+
+			header("location:login.php");
+		}
+		else{
+			die("Some information are not correct");
+		}
 	}

@@ -5,12 +5,12 @@ session_start();
 
 $secure_pages = array(
     "/cnambook2023/order.php",
-    "/cnambook2023/test.php"
 );
 $login_register_pages = array(
     "/cnambook2023/login.php",
     "/cnambook2023/register.php"
 );
+$admin_url = "/cnambook2023/admin/";
 if
 (
     in_array($_SERVER["PHP_SELF"], $secure_pages) && 
@@ -25,6 +25,15 @@ else if
 ){
     header("location:index.php");
 }
+// else if
+// (
+//     strrpos($_SERVER["PHP_SELF"], $admin_url) == 0 
+//     && isset($_SESSION["user"]) 
+//     && $_SESSION["user"]["is_admin"] != 1
+// )
+// {
+//     header("location:http://localhost/cnambook2023");
+// }
 
 
 
@@ -69,6 +78,7 @@ function preDisplay($array){
     echo "</pre>";
 }
 
+/* FORM INPUTS VALIDATION */
 function cleanTextInput($data){
     $data = trim($data);
     $data = stripslashes($data);
@@ -80,8 +90,16 @@ function checkEmail($email){
     $email = filter_var($email, FILTER_SANITIZE_EMAIL);
     $email = filter_var($email, FILTER_VALIDATE_EMAIL);
     return $email;
-    
 }
+
+function checkBirthdate($birthdate){
+    // Check if user has more than 18 years old
+    // Methode 1
+    // return (time() - strtotime($birthdate)) / 3600 / 24 / 365 >= 18
+    // Methode 2
+    return date_diff(date_create(), date_create($birthdate))->format("%y%") >= 18;
+}
+/* FORM INPUTS VALIDATION */
 
 function getLatestBooks($count){
     global $connection;

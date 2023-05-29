@@ -12,11 +12,11 @@
 		<form action="#" method="post">
 			<div class="input_container">
 			<label for="username">Username</label>
-			<input type="text" name="username" id="username" required value="cnamuser">
+			<input type="text" name="username" id="username" required value="">
 			</div>
 			<div class="input_container">
 			<label for="password">Password</label>
-			<input type="password" name="password" id="password" required value="cnamuser2023">
+			<input type="password" name="password" id="password" required value="">
 			</div>
 			<div class="input_container">
 			<label for="remember_me">Remember me</label>
