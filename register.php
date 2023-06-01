@@ -37,6 +37,9 @@
 		<div class="input_container">
 		<input type="submit" name="register" value="Register">
 		</div>
+		<div class="login-error">
+			<?= $error ?>
+		</div>
 	</form>
 </div>
 </body>

@@ -99,12 +99,20 @@ function checkBirthdate($birthdate){
     // Methode 2
     return date_diff(date_create(), date_create($birthdate))->format("%y%") >= 18;
 }
+
+function checkEmailUsernameExistance($email, $username){
+    global $connection;
+    $query = "SELECT id FROM user WHERE `email` = '$email' OR `username` = '$username'";
+    $result = mysqli_query($connection, $query);
+    return mysqli_num_rows($result) > 0;
+}
 /* FORM INPUTS VALIDATION */
 
 function getLatestBooks($count){
     global $connection;
     $query = "SELECT    b.isbn, 
                         b.title, 
+                        b.file,
                         c.description AS category, 
                         a.name as author, 
                         b.price 
@@ -126,6 +134,7 @@ function getLatestBooks($count){
     $html .= "<th>Author</th>";
     $html .= "<th>Price</th>";
     $html .= "<th>Buy Now</th>";
+    $html .= "<th>Download</th>";
     $html .= "</thead>";
     
     while($row = mysqli_fetch_array($result)){
@@ -136,6 +145,7 @@ function getLatestBooks($count){
         $html .= "<td>" . $row["author"] . "</td>";
         $html .= "<td align='right'>" . number_format($row["price"], 2) . "</td>";
         $html .= "<td><a href='order.php?isbn=" . $row["isbn"] . "'>Buy it now</a></td>";
+        $html .= "<td><a href='/cnambook2023/download.php?isbn=".$row["isbn"]."' target='_blank'>Download ".$row["title"]."</a></td>";
         $html .= "</tr>";
     }
 
