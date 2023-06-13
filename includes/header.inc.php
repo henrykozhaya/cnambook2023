@@ -15,6 +15,7 @@ require_once "includes/functions.inc.php";
         <nav>
         <ul class="menu">
             <li><a href="/cnambook2023">Home</a></li>
+            <li><a href="/cnambook2023/admin/index.php">Admin</a></li>
             <li><a href="/cnambook2023/books.php">Books</a></li>
             <li><a href="/cnambook2023/contact-us.php">Contact</a></li>
             

@@ -1,5 +1,6 @@
 <?php
 require_once "includes/header.inc.php";
+
 ?>
     <div style='text-align:center'>
     <?php

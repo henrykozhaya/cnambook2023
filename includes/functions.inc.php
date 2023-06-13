@@ -11,51 +11,40 @@ $login_register_pages = array(
     "/cnambook2023/register.php"
 );
 $admin_url = "/cnambook2023/admin/";
+
 if
 (
+    // Check if the page should be secured with login
     in_array($_SERVER["PHP_SELF"], $secure_pages) && 
+    // Check if the user is not logged in
     !isset($_SESSION["user"])
 ){
     header("location:login.php");
 }
 else if
 (
+    // Check if the page should not be accessible if the user is logged in
     in_array($_SERVER["PHP_SELF"], $login_register_pages) &&
+    // Check if the user is logged in
     isset($_SESSION["user"]) 
-){
+)
+{
     header("location:index.php");
 }
-// else if
-// (
-//     strrpos($_SERVER["PHP_SELF"], $admin_url) == 0 
-//     && isset($_SESSION["user"]) 
-//     && $_SESSION["user"]["is_admin"] != 1
-// )
-// {
-//     header("location:http://localhost/cnambook2023");
-// }
-
-
-
-
-
-
-
-
-
-
-
-// $adminPath = "/cnambook2023/admin/";
-// if(! 
-//     (
-//         strpos($_SERVER['REQUEST_URI'], $adminPath) == 0 && 
-//         isset($_SESSION["user"]) && 
-//         $_SESSION["user"]["isAdmin"]
-//     )
-// )
-// {
-//     echo "Not Admin";
-// }
+else if
+(
+    // Check if user is accessing an admin page
+    strrpos($_SERVER["PHP_SELF"], $admin_url) === 0 &&
+    (
+        // Check if user is logged in
+        !isset($_SESSION["user"]) ||
+        // Check if user is admin
+        $_SESSION["user"]["is_admin"] != 1
+    )
+)
+{
+    header("location:http://localhost/cnambook2023/index.php");
+}
 
 // Check if user ccookie exists
 if(!isset($_SESSION["user"]) && isset($_COOKIE["user_token"])){
